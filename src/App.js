@@ -1,25 +1,110 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Layout } from 'antd';
+import FileTree from './components/file-tree';
+import { generate } from '@ant-design/colors';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const { Header, Content, Footer } = Layout;
+const colors = generate('#308ab4');
+
+const App = () => {
+	const initialTreeData = [
+        {
+            title: 'Каталоги',
+            key: '0-0',
+            children: [
+                {
+                    title: 'Каталог А',
+                    key: '0-0-0',
+                    children: [
+                        { 
+                            title: 'Категория 1', 
+                            key: '0-0-0-0',
+                            children: [
+                                { title: 'Товар 1', key: '0-0-0-0-0' },
+                                { title: 'Товар 2', key: '0-0-0-0-1' }
+                            ]
+                        },
+                        { 
+                            title: 'Категория 2',
+                            key: '0-0-0-1',
+                            children: [
+                                { title: 'Товар 3', key: '0-0-0-1-0' },
+                                { title: 'Товар 4', key: '0-0-0-1-1' }
+                            ]
+                        },
+                    ],
+                },
+                {
+                    title: 'Каталог Б',
+                    key: '0-0-1',
+                    children: [
+                        { 
+                            title: 'Категория 1', 
+                            key: '0-0-1-0',
+                            children: [
+                                { title: 'Товар 5', key: '0-0-1-0-0' },
+                                { title: 'Товар 6', key: '0-0-1-0-1' }
+                            ]
+                        },
+                        { 
+                            title: 'Категория 2',
+                            key: '0-0-1-1',
+                            children: [
+                                { title: 'Товар 7', key: '0-0-1-1-0' },
+                                { title: 'Товар 8', key: '0-0-1-1-1' }
+                            ]
+                        },
+                    ],
+                },
+            ],
+    	},
+    ]
+
+	const [treeData, setTreeData] = useState(() => {
+        const storedData = localStorage.getItem('treeData');
+        return storedData ? JSON.parse(storedData) : initialTreeData;
+    });
+
+	const saveToLocalStorage = (newTree) => {
+		setTreeData(newTree);
+		localStorage.setItem('treeData', JSON.stringify(newTree));
+	};
+
+	return (
+		<Layout style={{colors}}>
+			<Header
+				style={{
+					position: 'sticky',
+					top: 0,
+					zIndex: 1,
+					display: 'flex',
+					alignItems: 'center',
+					background: '#082a42'
+				}}>
+				<h1 style={{ color: 'white' }}>Дерево каталогов</h1>
+			</Header>
+			<Content style={{ 
+				padding: '10px', 
+				minHeight: 800, 
+				background: '#e6f3f5' }}>
+				<FileTree 
+				data={treeData} 
+				setTreeData={setTreeData}
+				saveToLocalStorage={saveToLocalStorage} />
+			</Content>
+			<Footer
+				style={{ 
+					position: 'sticky',
+					bottom: 0,
+					zIndex: 1,
+					textAlign: 'center',
+					background: '#d3e4e8'
+				}}>
+					Ant Design ©{new Date().getFullYear()} Created by Ant UED
+			</Footer>
+		</Layout>
+	);
+};
 
 export default App;
