@@ -1,0 +1,19 @@
+.add-node-button {
+    background-color: #308ab4;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.add-node-button:hover {
+    background-color: #1f688f !important;
+}
+
+.delete-node-button {
+    background-color: #d3e4e8;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.delete-node-button:hover {
+    background-color: #e6f3f5 !important;
+}

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
-import FileTree from './components/file-tree';
+import FileTree from './components/file-tree/file-tree';
 import { generate } from '@ant-design/colors';
+import "./app.css";
 
 
 const { Header, Content, Footer } = Layout;
@@ -73,35 +74,17 @@ const App = () => {
 
 	return (
 		<Layout style={{colors}}>
-			<Header
-				style={{
-					position: 'sticky',
-					top: 0,
-					zIndex: 1,
-					display: 'flex',
-					alignItems: 'center',
-					background: '#082a42'
-				}}>
-				<h1 style={{ color: 'white' }}>Дерево каталогов</h1>
+			<Header className='header'>
+				<h1>Дерево каталогов</h1>
 			</Header>
-			<Content style={{ 
-				padding: '10px', 
-				minHeight: 800, 
-				background: '#e6f3f5' }}>
+			<Content className='content'>
 				<FileTree 
 				data={treeData} 
 				setTreeData={setTreeData}
 				saveToLocalStorage={saveToLocalStorage} />
 			</Content>
-			<Footer
-				style={{ 
-					position: 'sticky',
-					bottom: 0,
-					zIndex: 1,
-					textAlign: 'center',
-					background: '#d3e4e8'
-				}}>
-					Ant Design ©{new Date().getFullYear()} Created by Ant UED
+			<Footer className='footer'>
+                Ant Design ©{new Date().getFullYear()} Created by Ant UED
 			</Footer>
 		</Layout>
 	);

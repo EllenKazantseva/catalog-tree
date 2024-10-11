@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Input, message, Button, Tooltip, Popconfirm } from "antd";
+import "./add-node.css";
 
 const AddNode = ({ onAdd, onDelete, selectedKey }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,23 +31,18 @@ const AddNode = ({ onAdd, onDelete, selectedKey }) => {
         } else {
           message.error("Выберите узел для удаления.");
         }
-      };
+    };
 
     return (
         <>
         <Tooltip 
         title="Сначала выберите узел для добавления"
-        color="#082a42"
         placement="right"
-        >
+        color="#082a42" >
             <Button 
             type="primary"
-            onClick={showModal}
-            style={{
-                marginTop: 20,
-                marginLeft: 25,
-                background: "#308ab4" 
-                }}>
+            className="add-node-button"
+            onClick={showModal} >
                 Добавить узел
             </Button>
         </Tooltip>
@@ -56,32 +52,26 @@ const AddNode = ({ onAdd, onDelete, selectedKey }) => {
         onConfirm={handleDelete}
         okText="Да"
         cancelText="Нет"
-        disabled={!selectedKey}
-        >
-            <Button type="default" 
-            disabled={!selectedKey} 
-            style={{ 
-                marginTop: 20,
-                marginLeft: 25,
-                background: "#d3e4e8"
-                }}>
+        disabled={!selectedKey} >
+            <Button 
+            type="default" 
+            disabled={!selectedKey}
+            className="delete-node-button" >
             Удалить узел
             </Button>
         </Popconfirm>
 
         <Modal
-            title="Добавить новый узел"
-            open={isModalVisible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-            okText="Добавить"
-            cancelText="Отмена"
-        >
+        title="Добавить новый узел"
+        open={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Добавить"
+        cancelText="Отмена" >
             <Input
             value={newNodeTitle}
             onChange={(e) => setNewNodeTitle(e.target.value)}
-            placeholder="Введите название нового узла"
-            />
+            placeholder="Введите название нового узла" />
         </Modal>
         </>
     );

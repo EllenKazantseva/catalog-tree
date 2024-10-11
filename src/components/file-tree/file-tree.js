@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Tree, ConfigProvider } from "antd";
-import AddNode from "./add-node";
+import AddNode from "../add-node/add-node";
+import "./file-tree.css";
 
 const FileTree = ({ data, setTreeData, saveToLocalStorage }) => {
 	const [treeData, setTreeDataLocal] = useState(data);
@@ -24,8 +25,8 @@ const FileTree = ({ data, setTreeData, saveToLocalStorage }) => {
 					child.children = filterNodes(child.children);
 				}
 				return child;
-				})
-				.filter(Boolean);
+			})
+			.filter(Boolean);
 		};
 
 		const filteredData = filterNodes(nodes);
@@ -133,23 +134,22 @@ const FileTree = ({ data, setTreeData, saveToLocalStorage }) => {
 
 	return (
 		<ConfigProvider
+		className="nodes"
 		theme={{
 			components: {
-			  Tree: {
-				nodeSelectedBg: '#53a3c2',
-				nodeHoverBg: '#a4cfdb'
-			  },
+				Tree: {
+					nodeSelectedBg: '#53a3c2',
+					nodeHoverBg: '#a4cfdb'
+				},
 			},
 		}}>
 			<Tree
+			className="file-tree"
 			treeData={treeData}
 			onDrop={onDrop}
 			onSelect={onSelect}
 			draggable
 			defaultExpandAll
-			style={{
-				background: '#e6f3f5'
-			}}
 			/>
 			<AddNode onAdd={addNode}
 			onDelete={deleteNode}
