@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Layout } from 'antd';
 import FileTree from './components/file-tree/file-tree';
+import TreeService from './components/tree-service/tree-service';
 import { generate } from '@ant-design/colors';
 import "./app.css";
 
@@ -63,13 +64,13 @@ const App = () => {
     ]
 
 	const [treeData, setTreeData] = useState(() => {
-        const storedData = localStorage.getItem('treeData');
-        return storedData ? JSON.parse(storedData) : initialTreeData;
+        const storedData = TreeService.getTreeData();
+        return storedData || initialTreeData;
     });
 
 	const saveToLocalStorage = (newTree) => {
 		setTreeData(newTree);
-		localStorage.setItem('treeData', JSON.stringify(newTree));
+		TreeService.saveTreeData(newTree);
 	};
 
 	return (
