@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Modal, Input, message, Button, Tooltip, Popconfirm } from "antd";
+import { useTranslation } from "react-i18next";
 import "./add-node.css";
 
 const AddNode = ({ onAdd, onDelete, selectedKey }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [newNodeTitle, setNewNodeTitle] = useState("");
+    const { t } = useTranslation();
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -21,7 +23,7 @@ const AddNode = ({ onAdd, onDelete, selectedKey }) => {
         setIsModalVisible(false);
         setNewNodeTitle("");
         } else {
-        message.error("Введите название для нового узла.");
+        message.error('Enter the name of the new node');
         }
     };
 
@@ -29,49 +31,49 @@ const AddNode = ({ onAdd, onDelete, selectedKey }) => {
         if (selectedKey) {
           onDelete(selectedKey);
         } else {
-          message.error("Выберите узел для удаления.");
+          message.error('Select the node to delete');
         }
     };
 
     return (
         <>
         <Tooltip 
-        title="Сначала выберите узел для добавления"
+        title={t('enterNodeTitle')}
         placement="right"
         color="#082a42" >
             <Button 
             type="primary"
             className="add-node-button"
             onClick={showModal} >
-                Добавить узел
+                {t('addNode')}
             </Button>
         </Tooltip>
 
         <Popconfirm
-        title="Вы уверены, что хотите удалить этот узел?"
+        title={t('confirmDelete')}
         onConfirm={handleDelete}
-        okText="Да"
-        cancelText="Нет"
+        okText={t('yes')}
+        cancelText={t('no')}
         disabled={!selectedKey} >
             <Button 
             type="default" 
             disabled={!selectedKey}
             className="delete-node-button" >
-            Удалить узел
+            {t('deleteNode')}
             </Button>
         </Popconfirm>
 
         <Modal
-        title="Добавить новый узел"
+        title={t('addNewNode')}
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Добавить"
-        cancelText="Отмена" >
+        okText={t('addNode')}
+        cancelText={t('cancel')} >
             <Input
             value={newNodeTitle}
             onChange={(e) => setNewNodeTitle(e.target.value)}
-            placeholder="Введите название нового узла" />
+            placeholder={t('enterNodeName')} />
         </Modal>
         </>
     );

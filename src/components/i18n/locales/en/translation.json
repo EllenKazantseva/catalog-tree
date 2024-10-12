@@ -1,0 +1,12 @@
+{
+  "title": "Catalogs tree",
+  "enterNodeTitle": "First select the node to add",
+  "addNode": "Add node",
+  "confirmDelete": "Are you sure you want to delete this node?",
+  "yes": "Yes",
+  "no": "No",
+  "deleteNode": "Delete node",
+  "addNewNode": "Add new node",
+  "cancel": "Cancel",
+  "enterNodeName": "Enter the name of the new node"
+}

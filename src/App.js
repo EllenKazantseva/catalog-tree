@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Layout } from 'antd';
 import FileTree from './components/file-tree/file-tree';
 import TreeService from './components/tree-service/tree-service';
+import LanguageSwither from './components/language-switcher/language-switcher';
 import { generate } from '@ant-design/colors';
+import { useTranslation } from 'react-i18next';
 import "./app.css";
 
 
@@ -63,6 +65,8 @@ const App = () => {
     	},
     ]
 
+    const { t } = useTranslation();
+
 	const [treeData, setTreeData] = useState(() => {
         const storedData = TreeService.getTreeData();
         return storedData || initialTreeData;
@@ -76,7 +80,8 @@ const App = () => {
 	return (
 		<Layout style={{colors}}>
 			<Header className='header'>
-				<h1>Дерево каталогов</h1>
+				<h1>{t('title')}</h1>
+                <LanguageSwither />
 			</Header>
 			<Content className='content'>
 				<FileTree 
